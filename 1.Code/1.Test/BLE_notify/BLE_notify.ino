@@ -3,9 +3,13 @@
 #include <BLEServer.h>
 #include <BLEUtils.h>
 #include <BLE2902.h>
+#include "BLEBeacon.h"
+#include "BLEAdvertising.h"
+#include "BLEEddystoneURL.h"
 
 BLEServer* pServer = NULL;
 BLECharacteristic* pCharacteristic = NULL;
+BLEAdvertising *pAdvertising;
 
 String mac_address_wifi = "";
 String device_id = "";
@@ -46,35 +50,39 @@ void setup() {
   BLEDevice::init(device_id.c_str());
 
   // Create the BLE Server
-  pServer = BLEDevice::createServer();
-  pServer->setCallbacks(new MyServerCallbacks());
+  //  pServer = BLEDevice::createServer();
+  //  pServer->setCallbacks(new MyServerCallbacks());
 
 
 
   // Create the BLE Service
-  BLEService *pService = pServer->createService(SERVICE_UUID);
-
-  // Create a BLE Characteristic
-  pCharacteristic = pService->createCharacteristic(
-                      CHARACTERISTIC_UUID,
-                      BLECharacteristic::PROPERTY_READ   |
-                      BLECharacteristic::PROPERTY_WRITE  |
-                      BLECharacteristic::PROPERTY_NOTIFY |
-                      BLECharacteristic::PROPERTY_INDICATE
-                    );
+  //  BLEService *pService = pServer->createService(SERVICE_UUID);
+  //
+  //  // Create a BLE Characteristic
+  //  pCharacteristic = pService->createCharacteristic(
+  //                      CHARACTERISTIC_UUID,
+  //                      BLECharacteristic::PROPERTY_READ   |
+  //                      BLECharacteristic::PROPERTY_WRITE  |
+  //                      BLECharacteristic::PROPERTY_NOTIFY |
+  //                      BLECharacteristic::PROPERTY_INDICATE
+  //                    );
 
   // Create a BLE Descriptor
   pCharacteristic->addDescriptor(new BLE2902());
 
   // Start the service
-  pService->start();
+  //pService->start();
 
   // Start advertising
-  BLEAdvertising *pAdvertising = BLEDevice::getAdvertising();
+  pAdvertising = BLEDevice::getAdvertising();
   pAdvertising->addServiceUUID(SERVICE_UUID);
   pAdvertising->setScanResponse(false);
   pAdvertising->setMinPreferred(0x0);  // set value to 0x00 to not advertise this parameter
   BLEDevice::startAdvertising();
+
+   
+  // Start advertising
+  pAdvertising->start();
   Serial.println("Waiting a client connection to notify...");
 }
 
@@ -108,7 +116,7 @@ void loop() {
 
 
   pCharacteristic->setValue(payload.c_str());
-  pCharacteristic->notify(); 
+  pCharacteristic->notify();
   Serial.print("payload  :  "); Serial.println(payload);
   delay(10000);
 }
