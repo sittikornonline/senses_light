@@ -69,16 +69,17 @@ String device_id = "";
 #include "esp_sleep.h"
 
 #define GPIO_DEEP_SLEEP_DURATION 50
-#define time_advers 20 
+#define time_advers 20
+byte cnt_advers = 1;
 
 RTC_DATA_ATTR static time_t last;
 RTC_DATA_ATTR static uint32_t bootcount;
 
- 
-struct timeval nowTimeStruct; 
+
+struct timeval nowTimeStruct;
 time_t lastTenth;
-  
- 
+
+
 //----------------- LED RGB -------------------//
 #define red_pin 2
 #define green_pin 15
@@ -107,4 +108,4 @@ void led_batt_low();
 //----------------- Other -------------------//
 
 void f_init_all();
-String set_payload(); 
+String set_payload();

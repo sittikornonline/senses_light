@@ -43,10 +43,12 @@ String set_payload()
     led_batt_low();
     batt_full = 0;
   }
-
+  
 
   String payload = "";
   payload.concat(last_3_mac);
+  payload.concat(",");
+  payload.concat(cnt_advers);
   payload.concat(",");
   payload.concat(light_6030_raw);
   payload.concat(",");
@@ -77,12 +79,11 @@ String set_payload()
   Serial.print("6050 MPU    : ");
   Serial.print(ax); Serial.print("\t");
   Serial.print(ay); Serial.print("\t");
-  Serial.println(az);    
- 
+  Serial.println(az);
+
   Serial.print("payload     : "); Serial.println(payload);
   Serial.print("length      : "); Serial.println(payload.length());
   Serial.println("---------------------------------------------");
 
   return payload;
 }
- 
