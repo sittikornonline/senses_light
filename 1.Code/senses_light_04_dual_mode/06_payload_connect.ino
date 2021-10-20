@@ -43,7 +43,7 @@ String set_payload_connect()
     led_batt_low();
     batt_full = 0;
   }
-  
+
 
   String payload = "";
   payload.concat(last_3_mac);
@@ -66,24 +66,27 @@ String set_payload_connect()
   payload.concat(",");
   payload.concat(az);
 
-
-  Serial.print("mac_address : "); Serial.println(mac_address);
-  Serial.print("gateway_id  : "); Serial.println(gateway_id);
-  Serial.print("6030 AL     : "); Serial.print(light_6030_raw); Serial.println(" lux");
-  Serial.print("6040 AL     : "); Serial.print(light_6040_raw); Serial.println(" lux");
-  Serial.print("6075 UVA    : "); Serial.println(uv_a_raw);
-  Serial.print("6075 UVB    : "); Serial.println(uv_b_raw);
-  Serial.print("v_batt      : "); Serial.println(v_batt);
-  Serial.print("batt_full   : "); Serial.println(batt_full);
-
-  Serial.print("6050 MPU    : ");
-  Serial.print(ax); Serial.print("\t");
-  Serial.print(ay); Serial.print("\t");
-  Serial.println(az);
-
-  Serial.print("payload     : "); Serial.println(payload);
-  Serial.print("length      : "); Serial.println(payload.length());
-  Serial.println("---------------------------------------------");
+  if (single_shot == false)
+  {
+//    Serial.print("mac_address : "); Serial.println(mac_address);
+//    Serial.print("gateway_id  : "); Serial.println(gateway_id);
+//    Serial.print("6030 AL     : "); Serial.print(light_6030_raw); Serial.println(" lux");
+//    Serial.print("6040 AL     : "); Serial.print(light_6040_raw); Serial.println(" lux");
+//    Serial.print("6075 UVA    : "); Serial.println(uv_a_raw);
+//    Serial.print("6075 UVB    : "); Serial.println(uv_b_raw);
+//    Serial.print("v_batt      : "); Serial.println(v_batt);
+//    Serial.print("batt_full   : "); Serial.println(batt_full);
+//
+//    Serial.print("6050 MPU    : ");
+//    Serial.print(ax); Serial.print("\t");
+//    Serial.print(ay); Serial.print("\t");
+//    Serial.println(az);
+//
+//    Serial.print("payload     : "); Serial.println(payload);
+//    Serial.print("length      : "); Serial.println(payload.length());
+//    Serial.println("---------------------------------------------");
+    single_shot = true;
+  }
 
   return payload;
 }
