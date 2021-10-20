@@ -70,6 +70,8 @@ time_t lastTenth;
 
 uint16_t beconUUID = 0xFEAA;
 
+char payload_beacon[30];
+
 void setBeacon();
 
 //----------------- LED RGB -------------------//
