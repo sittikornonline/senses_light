@@ -15,12 +15,13 @@ void loop() {
   pAdvertising = BLEDevice::getAdvertising();
   setBeacon();
   pAdvertising->start();
-  delay(1000*time_advert);
+  delay(1000*time_advers);
 
 
   gettimeofday(&nowTimeStruct, NULL);
   Serial.printf("start ESP32 %d\n", bootcount++);
   Serial.printf("deep sleep (%lds since last reset, %lds since last boot)\n", nowTimeStruct.tv_sec, nowTimeStruct.tv_sec - last);
+  Serial.println("------------------ END ----------------------");
 
   last = nowTimeStruct.tv_sec;
   lastTenth = nowTimeStruct.tv_sec * 10; // Time since last reset as 0.1 second resolution counter

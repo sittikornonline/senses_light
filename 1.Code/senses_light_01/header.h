@@ -56,7 +56,7 @@ int16_t gx, gy, gz;
 #include "esp_sleep.h"
 
 #define GPIO_DEEP_SLEEP_DURATION 50
-#define time_advert 10
+#define time_advers 10
 
 RTC_DATA_ATTR static time_t last;
 RTC_DATA_ATTR static uint32_t bootcount;
