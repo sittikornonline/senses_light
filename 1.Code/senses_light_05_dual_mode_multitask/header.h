@@ -130,4 +130,12 @@ void led_batt_low();
 //----------------- Other -------------------//
 
 void f_init_all();
- 
+
+
+
+//----------------------- Task ---------------------------//
+TaskHandle_t Task_ble_connect;
+TaskHandle_t Task_ble_non_connect;
+
+void f_Task_ble_connect( void * pvParameters );
+void f_Task_ble_non_connect( void * pvParameters );

@@ -1,4 +1,4 @@
-String set_payload_connect()
+String set_payload_non_connect()
 {
 
   if (mc_mode == 1)
@@ -44,29 +44,50 @@ String set_payload_connect()
     batt_full = 0;
   }
 
+  String payload;
 
-  String payload = "";
-  payload.concat(last_3_mac);
-  payload.concat(",");
-  payload.concat(cnt_advers);
-  payload.concat(",");
-  payload.concat(light_6030_raw);
-  payload.concat(",");
-  payload.concat(light_6040_raw);
-  payload.concat(",");
-  payload.concat(uv_a_raw);
-  payload.concat(",");
-  payload.concat(uv_b_raw);
-  payload.concat(",");
-  payload.concat(v_batt);
-  payload.concat(",");
-  payload.concat(ax);
-  payload.concat(",");
-  payload.concat(ay);
-  payload.concat(",");
-  payload.concat(az);
+  if (cnt_advers == 1)
+  {
+    payload = "";
+    payload.concat(last_3_mac);
+    payload.concat(",");
+    payload.concat(cnt_advers);
+    payload.concat(",");
+    payload.concat(light_6030_raw);
+    payload.concat(",");
+    payload.concat(light_6040_raw);
 
+  }
 
+  else if (cnt_advers == 2)
+  {
+    payload = "";
+    payload.concat(last_3_mac);
+    payload.concat(",");
+    payload.concat(cnt_advers);
+    payload.concat(",");
+    payload.concat(uv_a_raw);
+    payload.concat(",");
+    payload.concat(uv_b_raw);
+    payload.concat(",");
+    payload.concat(v_batt);
+  }
+
+  else if (cnt_advers == 3)
+  {
+    payload = "";
+    payload.concat(last_3_mac);
+    payload.concat(",");
+    payload.concat(cnt_advers);
+    payload.concat(",");
+    payload.concat(ax);
+    payload.concat(",");
+    payload.concat(ay);
+    payload.concat(",");
+    payload.concat(batt_full);
+  }
+
+  Serial.print("cnt_advers  : "); Serial.println(cnt_advers);
   Serial.print("mac_address : "); Serial.println(mac_address);
   Serial.print("gateway_id  : "); Serial.println(gateway_id);
   Serial.print("6030 AL     : "); Serial.print(light_6030_raw); Serial.println(" lux");
@@ -79,12 +100,14 @@ String set_payload_connect()
   Serial.print("6050 MPU    : ");
   Serial.print(ax); Serial.print("\t");
   Serial.print(ay); Serial.print("\t");
-  Serial.println(az);
+  Serial.println(az); 
+ 
 
-  Serial.print("payload     : "); Serial.println(payload);
+  Serial.print("payload     : "); Serial.println(payload); 
   Serial.print("length      : "); Serial.println(payload.length());
   Serial.println("---------------------------------------------");
-
-
+  cnt_advers ++;
   return payload;
 }
+
+ 
