@@ -1,3 +1,4 @@
+#include <Arduino.h>
 #include "Wire.h"
 #define mc_mode 2 // 1 : run , 2 random
 
@@ -44,21 +45,30 @@ int16_t gx, gy, gz;
 
 //----------------- BLE -------------------//
 
-#include "sys/time.h"
-
-#include <Arduino.h>
-
-#include "BLEDevice.h"
-#include "BLEUtils.h"
+#include <WiFi.h>
+#include <BLEDevice.h>
+#include <BLEServer.h>
+#include <BLEUtils.h>
+#include <BLE2902.h>
 #include "BLEBeacon.h"
 #include "BLEAdvertising.h"
 #include "BLEEddystoneURL.h"
 
+BLEServer* pServer = NULL;
+BLECharacteristic* pCharacteristic = NULL;
+BLEAdvertising *pAdvertising;
+
+String mac_address_wifi = "";
+String device_id = "";
+
+#define SERVICE_UUID        "4fafc201-1fb5-459e-8fcc-c5c9c331914b"
+#define CHARACTERISTIC_UUID "beb5483e-36e1-4688-b7f5-ea07361b26a8"
+
+
 #include "esp_sleep.h"
 
-#define GPIO_DEEP_SLEEP_DURATION 50
-#define time_advers 10
-byte cnt_advers = 1;
+#define GPIO_DEEP_SLEEP_DURATION 10
+#define time_advers 20 
 
 RTC_DATA_ATTR static time_t last;
 RTC_DATA_ATTR static uint32_t bootcount;
@@ -71,11 +81,7 @@ time_t lastTenth;
 #define BEACON_UUID "8ec76ea3-6668-48da-9866-75be8bc86f4d"
 
 uint16_t beconUUID = 0xFEAA;
-
-char payload_beacon[30];
-
-void setBeacon();
-
+ 
 //----------------- LED RGB -------------------//
 #define red_pin 2
 #define green_pin 15

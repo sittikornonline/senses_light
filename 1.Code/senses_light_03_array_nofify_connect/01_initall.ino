@@ -8,7 +8,7 @@ void f_init_all()
   mac_address.replace(":", "");
   last_3_mac = mac_address.substring(9, 12);
   gateway_id = "SEN_" + last_3_mac;
-  
+
 
   //----------------- i2C -------------//
   Wire.begin (21, 22);
@@ -54,10 +54,48 @@ void f_init_all()
 
   //----------------- V-Batt -------------------//
 
-  analogReadResolution(10); 
+  analogReadResolution(10);
   pinMode(batt_pin, OUTPUT);
 
-  
+
+  //----------------- BLE -------------------//
+
+  // Create the BLE Device
+  BLEDevice::init(gateway_id.c_str());
+  BLEDevice::setPower(ESP_PWR_LVL_N12);
+
+  // Create the BLE Server
+  pServer = BLEDevice::createServer();
+  pServer->setCallbacks(new MyServerCallbacks());
+
+
+  Create the BLE Service
+  BLEService *pService = pServer->createService(SERVICE_UUID);
+
+  // Create a BLE Characteristic
+  pCharacteristic = pService->createCharacteristic(
+                      CHARACTERISTIC_UUID,
+                      BLECharacteristic::PROPERTY_READ   |
+                      BLECharacteristic::PROPERTY_WRITE  |
+                      BLECharacteristic::PROPERTY_NOTIFY |
+                      BLECharacteristic::PROPERTY_INDICATE
+                    );
+
+  // Create a BLE Descriptor
+  pCharacteristic->addDescriptor(new BLE2902());
+
+  // Start the service
+  pService->start();
+
+  // Start advertising
+  pAdvertising = BLEDevice::getAdvertising();
+  pAdvertising->addServiceUUID(SERVICE_UUID);
+  pAdvertising->setScanResponse(false);
+  pAdvertising->setMinPreferred(0x0);  // set value to 0x00 to not advertise this parameter
+  BLEDevice::startAdvertising();
+
+  // Start advertising
+  pAdvertising->start();
 
 
 }
