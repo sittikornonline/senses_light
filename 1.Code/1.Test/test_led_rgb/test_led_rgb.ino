@@ -16,7 +16,7 @@ void setup() {
   ledcSetup(green_Channel, freq, resolution);
   ledcSetup(blue_Channel, freq, resolution);
 
-  
+
   ledcAttachPin(red_pin,   red_Channel);
   ledcAttachPin(green_pin, green_Channel);
   ledcAttachPin(blue_pin,  blue_Channel);
@@ -30,11 +30,11 @@ void setup() {
 
 void loop() {
 
-  led_rgb(255, 0, 0);  delay(1000);
-  led_rgb(0, 255, 0);  delay(1000);
-  led_rgb(0, 0, 255);  delay(1000);
-  led_rgb(255, 255, 255);  delay(1000);
-  led_rgb(0, 0, 0);  delay(1000);
+  Serial.println("1");  led_rgb(255, 0, 0);  delay(1000);
+  Serial.println("2");  led_rgb(0, 255, 0);  delay(1000);
+  Serial.println("3");  led_rgb(0, 0, 255);  delay(1000); 
+  Serial.println("4");  led_rgb(0, 0, 0);  delay(1000);
+  Serial.println("5");  led_rgb(255, 255, 255);  delay(3000);
 
 }
 

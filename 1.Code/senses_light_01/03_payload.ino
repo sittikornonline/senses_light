@@ -67,7 +67,7 @@ String set_payload()
   Serial.println(gz);
 
   Serial.print("payload     : "); Serial.println(payload);
-  Serial.println("--------------------------------------------------");
+  //Serial.println("--------------------------------------------------");
 
   return payload;
 }

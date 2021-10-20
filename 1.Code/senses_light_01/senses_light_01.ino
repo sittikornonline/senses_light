@@ -19,8 +19,8 @@ void loop() {
 
 
   gettimeofday(&nowTimeStruct, NULL);
-  Serial.printf("start ESP32 %d\n", bootcount++);
-  Serial.printf("deep sleep (%lds since last reset, %lds since last boot)\n", nowTimeStruct.tv_sec, nowTimeStruct.tv_sec - last);
+  //Serial.printf("start ESP32 %d\n", bootcount++);
+  Serial.println("\ndeep sleep");
   Serial.println("------------------ END ----------------------");
 
   last = nowTimeStruct.tv_sec;

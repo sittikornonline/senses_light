@@ -48,9 +48,5 @@ void f_init_all()
   pinMode(green_pin, OUTPUT);
   pinMode(blue_pin, OUTPUT);
 
-  digitalWrite(red_pin,HIGH);
-  digitalWrite(green_pin,HIGH);
-  digitalWrite(blue_pin,HIGH);
-
-  //led_rgb(255, 255, 255);  
+  led_rgb(255, 255, 255);
 }
