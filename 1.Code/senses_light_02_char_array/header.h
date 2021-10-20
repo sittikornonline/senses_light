@@ -70,7 +70,7 @@ time_t lastTenth;
 
 uint16_t beconUUID = 0xFEAA;
 
-char payload_beacon[30];
+char payload_beacon[100];
 
 void setBeacon();
 
