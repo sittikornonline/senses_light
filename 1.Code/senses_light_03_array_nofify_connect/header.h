@@ -65,22 +65,19 @@ String device_id = "";
 #define CHARACTERISTIC_UUID "beb5483e-36e1-4688-b7f5-ea07361b26a8"
 
 
+//----------------- Deep Sleep -------------------//
 #include "esp_sleep.h"
 
-#define GPIO_DEEP_SLEEP_DURATION 10
+#define GPIO_DEEP_SLEEP_DURATION 50
 #define time_advers 20 
 
 RTC_DATA_ATTR static time_t last;
 RTC_DATA_ATTR static uint32_t bootcount;
 
-BLEAdvertising *pAdvertising;
-struct timeval nowTimeStruct;
-
+ 
+struct timeval nowTimeStruct; 
 time_t lastTenth;
-
-#define BEACON_UUID "8ec76ea3-6668-48da-9866-75be8bc86f4d"
-
-uint16_t beconUUID = 0xFEAA;
+  
  
 //----------------- LED RGB -------------------//
 #define red_pin 2

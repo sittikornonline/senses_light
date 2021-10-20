@@ -20,13 +20,11 @@ void loop() {
   delay(1000 * time_advers);
 
   //Advers 2
-  setBeacon();
-  //pAdvertising->start();
+  setBeacon(); 
   delay(1000 * time_advers);
 
   //Advers 3
-  setBeacon();
- // pAdvertising->start();
+  setBeacon(); 
   delay(1000 * time_advers);
 
 
@@ -39,6 +37,4 @@ void loop() {
   lastTenth = nowTimeStruct.tv_sec * 10; // Time since last reset as 0.1 second resolution counter
   esp_deep_sleep(1000000LL * GPIO_DEEP_SLEEP_DURATION);
 
-
-  //  ESP.restart();
 }

@@ -44,50 +44,27 @@ String set_payload()
     batt_full = 0;
   }
 
-  String payload;
 
-  if (cnt_advers == 1)
-  {
-    payload = "";
-    payload.concat(last_3_mac);
-    payload.concat(",");
-    payload.concat(cnt_advers);
-    payload.concat(",");
-    payload.concat(light_6030_raw);
-    payload.concat(",");
-    payload.concat(light_6040_raw);
+  String payload = "";
+  payload.concat(last_3_mac);
+  payload.concat(",");
+  payload.concat(light_6030_raw);
+  payload.concat(",");
+  payload.concat(light_6040_raw);
+  payload.concat(",");
+  payload.concat(uv_a_raw);
+  payload.concat(",");
+  payload.concat(uv_b_raw);
+  payload.concat(",");
+  payload.concat(v_batt);
+  payload.concat(",");
+  payload.concat(ax);
+  payload.concat(",");
+  payload.concat(ay);
+  payload.concat(",");
+  payload.concat(az);
 
-  }
 
-  else if (cnt_advers == 2)
-  {
-    payload = "";
-    payload.concat(last_3_mac);
-    payload.concat(",");
-    payload.concat(cnt_advers);
-    payload.concat(",");
-    payload.concat(uv_a_raw);
-    payload.concat(",");
-    payload.concat(uv_b_raw);
-    payload.concat(",");
-    payload.concat(v_batt);
-  }
-
-  else if (cnt_advers == 3)
-  {
-    payload = "";
-    payload.concat(last_3_mac);
-    payload.concat(",");
-    payload.concat(cnt_advers);
-    payload.concat(",");
-    payload.concat(ax);
-    payload.concat(",");
-    payload.concat(ay);
-    payload.concat(",");
-    payload.concat(batt_full);
-  }
-
-  Serial.print("cnt_advers  : "); Serial.println(cnt_advers);
   Serial.print("mac_address : "); Serial.println(mac_address);
   Serial.print("gateway_id  : "); Serial.println(gateway_id);
   Serial.print("6030 AL     : "); Serial.print(light_6030_raw); Serial.println(" lux");
@@ -100,46 +77,12 @@ String set_payload()
   Serial.print("6050 MPU    : ");
   Serial.print(ax); Serial.print("\t");
   Serial.print(ay); Serial.print("\t");
-  Serial.print(az); Serial.print("\t");
-  Serial.print(gx); Serial.print("\t");
-  Serial.print(gy); Serial.print("\t");
-  Serial.println(gz);
+  Serial.println(az);    
  
-
-  Serial.print("payload     : "); Serial.println(payload); 
+  Serial.print("payload     : "); Serial.println(payload);
   Serial.print("length      : "); Serial.println(payload.length());
   Serial.println("---------------------------------------------");
-  cnt_advers ++;
+
   return payload;
 }
-
-
-
-char* str2charArray(String str) {
-
-  int str_len = str.length() + 1;
-  char char_array[str_len];
-  str.toCharArray(char_array, str_len);
-
-
-}
-
-long x2i(char *s)
-{
-  long x = 0;
-  for (;;) {
-    char c = *s;
-    if (c >= '0' && c <= '9') {
-      x *= 16;
-      x += c - '0';
-    }
-    else if (c >= 'A' && c <= 'F') {
-      x *= 16;
-      x += (c - 'A') + 10;
-    }
-    else break;
-    s++;
-  }
-
-  return x;
-}
+ 

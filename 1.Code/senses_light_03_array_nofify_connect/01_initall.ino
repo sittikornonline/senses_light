@@ -69,7 +69,7 @@ void f_init_all()
   pServer->setCallbacks(new MyServerCallbacks());
 
 
-  Create the BLE Service
+  //Create the BLE Service
   BLEService *pService = pServer->createService(SERVICE_UUID);
 
   // Create a BLE Characteristic

@@ -54,8 +54,15 @@ int16_t gx, gy, gz;
 #include "BLEAdvertising.h"
 #include "BLEEddystoneURL.h"
 
-#include "esp_sleep.h"
+#define BEACON_UUID "8ec76ea3-6668-48da-9866-75be8bc86f4d"
 
+uint16_t beconUUID = 0xFEAA; 
+char payload_beacon[30]; 
+void setBeacon();
+
+//----------------- Deep Sleep -------------------//
+
+#include "esp_sleep.h"
 #define GPIO_DEEP_SLEEP_DURATION 50
 #define time_advers 10
 byte cnt_advers = 1;
@@ -68,13 +75,7 @@ struct timeval nowTimeStruct;
 
 time_t lastTenth;
 
-#define BEACON_UUID "8ec76ea3-6668-48da-9866-75be8bc86f4d"
 
-uint16_t beconUUID = 0xFEAA;
-
-char payload_beacon[30];
-
-void setBeacon();
 
 //----------------- LED RGB -------------------//
 #define red_pin 2
@@ -104,4 +105,4 @@ void led_batt_low();
 //----------------- Other -------------------//
 
 void f_init_all();
-String set_payload(); 
+String set_payload();

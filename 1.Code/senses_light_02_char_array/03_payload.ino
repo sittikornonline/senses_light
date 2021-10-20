@@ -100,10 +100,7 @@ String set_payload()
   Serial.print("6050 MPU    : ");
   Serial.print(ax); Serial.print("\t");
   Serial.print(ay); Serial.print("\t");
-  Serial.print(az); Serial.print("\t");
-  Serial.print(gx); Serial.print("\t");
-  Serial.print(gy); Serial.print("\t");
-  Serial.println(gz);
+  Serial.println(az); 
  
 
   Serial.print("payload     : "); Serial.println(payload); 
@@ -113,33 +110,4 @@ String set_payload()
   return payload;
 }
 
-
-
-char* str2charArray(String str) {
-
-  int str_len = str.length() + 1;
-  char char_array[str_len];
-  str.toCharArray(char_array, str_len);
-
-
-}
-
-long x2i(char *s)
-{
-  long x = 0;
-  for (;;) {
-    char c = *s;
-    if (c >= '0' && c <= '9') {
-      x *= 16;
-      x += c - '0';
-    }
-    else if (c >= 'A' && c <= 'F') {
-      x *= 16;
-      x += (c - 'A') + 10;
-    }
-    else break;
-    s++;
-  }
-
-  return x;
-}
+ 
