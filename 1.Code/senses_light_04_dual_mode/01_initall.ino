@@ -96,29 +96,7 @@ void f_init_all()
 
   // Start advertising
   pAdvertising->start();
-
-
-
-  //----------------------- Task ---------------------------//
-
-  xTaskCreatePinnedToCore(
-    f_Task_ble_connect,   /* Task function. */
-    "Task_ble_connect",     /* name of task. */
-    5000,       /* Stack size of task */
-    NULL,        /* parameter of the task */
-    1,           /* priority of the task */
-    &Task_ble_connect,      /* Task handle to keep track of created task */
-    1);          /* pin task to core 1 */
-
-
-  xTaskCreatePinnedToCore(
-    f_Task_ble_non_connect,   /* Task function. */
-    "Task_ble_non_connect",     /* name of task. */
-    5000,       /* Stack size of task */
-    NULL,        /* parameter of the task */
-    1,           /* priority of the task */
-    &Task_ble_non_connect,      /* Task handle to keep track of created task */
-    1);          /* pin task to core 1 */
+ 
 
 
 }
