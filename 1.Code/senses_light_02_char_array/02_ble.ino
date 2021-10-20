@@ -14,10 +14,11 @@ void setBeacon()
   payload_beacon[sizeof(payload)];
   payload.toCharArray(payload_beacon, sizeof(payload_beacon));
 
-  Serial.print("--> payload         : "); Serial.println(payload);
-  Serial.print("--> payload_beacon  : "); Serial.println(payload_beacon);
+  //  Serial.print("--> payload         : "); Serial.println(payload);
+  //  Serial.print("--> payload_beacon  : "); Serial.println(payload_beacon);
 
-  oScanResponseData.setServiceData(BLEUUID(beconUUID), std::string(payload_beacon, payload_length));
+  //oScanResponseData.setServiceData(BLEUUID(beconUUID), std::string(payload_beacon, payload_length));
+   oScanResponseData.setServiceData(BLEUUID(beconUUID), std::string("123456789012345678901"));
   oAdvertisementData.setName(gateway_id.c_str());
   pAdvertising->setAdvertisementData(oAdvertisementData);
   pAdvertising->setScanResponseData(oScanResponseData);

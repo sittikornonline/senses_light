@@ -49,4 +49,13 @@ void f_init_all()
   pinMode(blue_pin, OUTPUT);
 
   led_rgb(255, 255, 255);
+
+  //----------------- V-Batt -------------------//
+
+  analogReadResolution(10); 
+  pinMode(batt_pin, OUTPUT);
+
+  
+
+
 }

@@ -8,6 +8,11 @@ String set_payload()
     uv_a_raw = uv.uva();
     uv_b_raw = uv.uvb();
     accelgyro.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
+
+    v_batt = analogRead(v_batt_pin);
+    v_batt = map(v_batt, 0, 6.6, 0, 100);
+    batt = digitalRead(batt_pin);
+
   }
 
   else
@@ -22,7 +27,23 @@ String set_payload()
     gx = random(-100, 100);
     gy = random(-100, 100);
     gz = random(-100, 100);
+
+    v_batt = analogRead(v_batt_pin);
+    v_batt = map(v_batt, 0, 6.6, 0, 100);
+    batt = digitalRead(batt_pin);
   }
+
+  if (batt == 1)
+  {
+    led_batt_full();
+  }
+  else
+  {
+
+    led_batt_low();
+  }
+
+
 
 
   String payload;
@@ -49,6 +70,10 @@ String set_payload()
   payload.concat(gy);
   payload.concat(",");
   payload.concat(gz);
+  payload.concat(",");
+  payload.concat(v_batt_map);
+  payload.concat(",");
+  payload.concat(batt);
 
 
   Serial.print("mac_address : "); Serial.println(mac_address);
@@ -57,6 +82,9 @@ String set_payload()
   Serial.print("6040 AL     : "); Serial.print(light_6040_raw); Serial.println(" lux");
   Serial.print("6075 UVA    : "); Serial.println(uv_a_raw);
   Serial.print("6075 UVB    : "); Serial.println(uv_b_raw);
+  Serial.print("v_batt      : "); Serial.println(v_batt);
+  Serial.print("v_map       : "); Serial.println(v_batt_map);
+  Serial.print("batt        : "); Serial.println(batt);
 
   Serial.print("6050 MPU    : ");
   Serial.print(ax); Serial.print("\t");
@@ -67,6 +95,7 @@ String set_payload()
   Serial.println(gz);
 
   Serial.print("payload     : "); Serial.println(payload);
+
   //Serial.println("--------------------------------------------------");
 
   return payload;

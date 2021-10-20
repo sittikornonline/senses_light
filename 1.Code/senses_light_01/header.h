@@ -55,8 +55,8 @@ int16_t gx, gy, gz;
 
 #include "esp_sleep.h"
 
-#define GPIO_DEEP_SLEEP_DURATION 50
-#define time_advers 10
+#define GPIO_DEEP_SLEEP_DURATION 5
+#define time_advers 5
 
 RTC_DATA_ATTR static time_t last;
 RTC_DATA_ATTR static uint32_t bootcount;
@@ -69,6 +69,8 @@ time_t lastTenth;
 #define BEACON_UUID "8ec76ea3-6668-48da-9866-75be8bc86f4d"
 
 uint16_t beconUUID = 0xFEAA;
+
+char payload_beacon[100];
 
 void setBeacon();
 
@@ -85,6 +87,12 @@ const int blue_Channel = 2;
 const int resolution = 8;
 
 void led_rgb(int r, int g, int b);
+
+//----------------- V-Batt -------------------//
+#define batt_pin 39
+int v_batt = 0;
+int v_batt_map = 0;
+
 //----------------- Other -------------------//
 
 void f_init_all();
