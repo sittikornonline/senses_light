@@ -50,28 +50,28 @@ void setup() {
   BLEDevice::init(device_id.c_str());
 
   // Create the BLE Server
-  //  pServer = BLEDevice::createServer();
-  //  pServer->setCallbacks(new MyServerCallbacks());
+  pServer = BLEDevice::createServer();
+  pServer->setCallbacks(new MyServerCallbacks());
 
 
 
-  // Create the BLE Service
-  //  BLEService *pService = pServer->createService(SERVICE_UUID);
-  //
-  //  // Create a BLE Characteristic
-  //  pCharacteristic = pService->createCharacteristic(
-  //                      CHARACTERISTIC_UUID,
-  //                      BLECharacteristic::PROPERTY_READ   |
-  //                      BLECharacteristic::PROPERTY_WRITE  |
-  //                      BLECharacteristic::PROPERTY_NOTIFY |
-  //                      BLECharacteristic::PROPERTY_INDICATE
-  //                    );
+  Create the BLE Service
+  BLEService *pService = pServer->createService(SERVICE_UUID);
+
+  // Create a BLE Characteristic
+  pCharacteristic = pService->createCharacteristic(
+                      CHARACTERISTIC_UUID,
+                      BLECharacteristic::PROPERTY_READ   |
+                      BLECharacteristic::PROPERTY_WRITE  |
+                      BLECharacteristic::PROPERTY_NOTIFY |
+                      BLECharacteristic::PROPERTY_INDICATE
+                    );
 
   // Create a BLE Descriptor
   pCharacteristic->addDescriptor(new BLE2902());
 
   // Start the service
-  //pService->start();
+  pService->start();
 
   // Start advertising
   pAdvertising = BLEDevice::getAdvertising();
@@ -80,7 +80,7 @@ void setup() {
   pAdvertising->setMinPreferred(0x0);  // set value to 0x00 to not advertise this parameter
   BLEDevice::startAdvertising();
 
-   
+
   // Start advertising
   pAdvertising->start();
   Serial.println("Waiting a client connection to notify...");
