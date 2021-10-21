@@ -23,12 +23,12 @@ void set_payload()
     light_6040_raw = random(1, 800);
     uv_a_raw = random(0, 255);
     uv_b_raw = random(0, 255);
-    ax = random(-100, 100);
-    ay = random(-100, 100);
-    az = random(-100, 100);
-    gx = random(-100, 100);
-    gy = random(-100, 100);
-    gz = random(-100, 100);
+    ax = random(-10, 100);
+    ay = random(-10, 100);
+    az = random(-10, 100);
+    gx = random(-10, 100);
+    gy = random(-10, 100);
+    gz = random(-10, 100);
 
     v_batt = analogRead(v_batt_pin);
     v_batt = map(v_batt, 0, 6.6, 0, 100);
@@ -116,11 +116,13 @@ void set_payload()
   Serial.print("payload_beacon : ");
   for (int i = 0; i < payload_beacon_length; i++)
   {
-    Serial.print(payload_beacon[i], HEX); Serial.print("-");
+    Serial.print(payload_beacon[i], HEX); Serial.print(":");
   }
 
   Serial.println("\n---------------------------------------------");
   cnt_advers ++;
+
+
 
 }
 
@@ -162,11 +164,11 @@ void mac_to_byte_array()
 
   String mac_1_str;
   mac_1_str =  x2i(str2charArray(mac_1));
-  unsigned int mac_1_int = mac_1_str.toInt();
+  int mac_1_int = mac_1_str.toInt();
 
   String mac_2_str;
   mac_2_str =  x2i(str2charArray(mac_2));
-  unsigned int mac_2_int = mac_2_str.toInt();
+  int mac_2_int = mac_2_str.toInt();
 
 
   payload_mac[6];

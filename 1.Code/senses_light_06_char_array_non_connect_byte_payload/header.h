@@ -62,8 +62,8 @@ void setBeacon();
 //----------------- Deep Sleep -------------------//
 
 #include "esp_sleep.h"
-#define GPIO_DEEP_SLEEP_DURATION 10
-#define time_advers 30
+#define GPIO_DEEP_SLEEP_DURATION 50
+#define time_advers 15
 byte cnt_advers = 1;
 
 RTC_DATA_ATTR static time_t last;
