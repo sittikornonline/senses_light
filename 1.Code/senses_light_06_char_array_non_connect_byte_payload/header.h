@@ -1,5 +1,5 @@
 #include "Wire.h"
-#define mc_mode 2 // 1 : run , 2 random
+#define mc_mode 1 // 1 : run , 2 random
 
 
 //------------- WiFI : MAC Address -------------//
@@ -115,3 +115,6 @@ byte payload_beacon_length = 0;
 char* str2charArray(String str) ;
 long x2i(char *s);
 void mac_to_byte_array();
+
+//----------------- Power sensor off -----------//
+#define power_sensor_pin 12

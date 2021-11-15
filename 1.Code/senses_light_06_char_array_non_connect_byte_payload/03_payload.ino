@@ -15,6 +15,9 @@ void set_payload()
     v_batt = map(v_batt, 0, 6.6, 0, 100);
     batt_full = digitalRead(batt_pin);
 
+    delay(800);
+    digitalWrite(power_sensor_pin, LOW);
+
   }
 
   else

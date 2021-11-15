@@ -9,7 +9,7 @@ void f_init_all()
   last_3_mac = mac_address.substring(9, 12);
   gateway_id = "SEN_" + last_3_mac;
   mac_to_byte_array();
-  
+
 
   //----------------- i2C -------------//
   Wire.begin (21, 22);
@@ -55,10 +55,14 @@ void f_init_all()
 
   //----------------- V-Batt -------------------//
 
-  analogReadResolution(10); 
+  analogReadResolution(10);
   pinMode(batt_pin, OUTPUT);
 
-  
+
+  //----------------- Power sensor off -----------//
+
+  pinMode(power_sensor_pin, OUTPUT);
+  digitalWrite(power_sensor_pin, HIGH);
 
 
 }
