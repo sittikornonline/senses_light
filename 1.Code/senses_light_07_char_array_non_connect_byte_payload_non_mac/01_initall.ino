@@ -63,6 +63,7 @@ void f_init_all()
 
   pinMode(power_sensor_pin, OUTPUT);
   digitalWrite(power_sensor_pin, HIGH);
+  delay(1000);
 
 
 }
