@@ -51,9 +51,9 @@ void setup() {
 
 
 
-  //  Serial.flush();
-  //  esp_deep_sleep_start();
-  //  Serial.println("This message will never be printed");
+    Serial.flush();
+    esp_deep_sleep_start();
+    Serial.println("This message will never be printed");
 
 
 
