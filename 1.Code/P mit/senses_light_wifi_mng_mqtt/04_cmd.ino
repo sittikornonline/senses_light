@@ -97,10 +97,12 @@ void f_cmd(String data)
     code_cmd_spiff = 7;
   }
 
-  else if (data == "8") 
+  else if (data == "8")
   {
     set_payload();
   }
+
+
 
   else if (data == "rs") {
     ESP.restart();

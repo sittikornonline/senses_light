@@ -7,7 +7,7 @@
 #include "StringSplitter.h"
 
 #define FORMAT_SPIFFS_IF_FAILED true
-#define sizeBuffer 1000
+#define sizeBuffer 1200
 
 
 class senses_spiff {

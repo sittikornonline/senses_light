@@ -139,7 +139,7 @@ void initall();
 
 //------------------------ EEPROM ----------------------//
 #include "EEPROM.h"
-#define EEPROM_SIZE 100
+#define EEPROM_SIZE 120
 #define add_ssid 0
 #define add_passw 30
 #define add_unix_time 60
@@ -354,6 +354,7 @@ String ends = "\n";
 bool emptyFile = false;
 byte code_cmd_spiff = 0;
 bool flag_spiff = false;
+String test_larg_payload();
 
 //----------------- RTC - BuildIn ----------------------//
 bool flag_upload_when_night = true;

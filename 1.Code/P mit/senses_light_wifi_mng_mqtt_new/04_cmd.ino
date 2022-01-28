@@ -97,9 +97,16 @@ void f_cmd(String data)
     code_cmd_spiff = 7;
   }
 
-  else if (data == "8") 
+  else if (data == "8")
   {
-    set_payload();
+    flag_spiff = true;
+    code_cmd_spiff = 8;
+  }
+
+  else if (data == "9")
+  { 
+    code_cmd_spiff = 9;
+    flag_spiff = true;
   }
 
   else if (data == "rs") {
@@ -169,7 +176,6 @@ void f_debug_other()
       //      debug("FreeHeap    : "); debugln(String(ESP.getFreeHeap()));
 
       Serial.print("mac_address       : "); Serial.println(mac_address);
-      Serial.print("read_push_button  : "); Serial.println(read_push_button);
       Serial.print("flag_upload_when_night        : "); Serial.println(flag_upload_when_night);
       Serial.print("c_setup_wifi      : "); Serial.println(c_setup_wifi);
       Serial.print("status_mqtt       : "); Serial.println(status_mqtt);

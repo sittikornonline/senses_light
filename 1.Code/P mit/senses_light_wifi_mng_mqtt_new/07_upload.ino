@@ -8,9 +8,13 @@ void putData()
     return;
   }
 
-  String dataFileName = payload_str + ends;
+  String a = test_larg_payload();
+  
+  String dataFileName = "";
+  dataFileName.reserve(10000);
+  dataFileName = payload_str + ends;
 
-  int lengths = dataFileName.length() + 1;
+  unsigned int lengths = dataFileName.length() + 1;
   char dataFileName1[lengths];
 
   dataFileName.toCharArray(dataFileName1, lengths);
@@ -18,7 +22,11 @@ void putData()
   Serial.print("appendFile => ");   Serial.println(dataFileName1);
 
   //Serial.println("========== readFile ==============");
-  String sdFile = spiff.readFile(SPIFFS, "/buffer.txt");
+
+  String sdFile = "";
+  sdFile.reserve(90000);
+
+  sdFile = spiff.readFile(SPIFFS, "/buffer.txt");
   Serial.println("readFile  : "); Serial.println(sdFile);
 
   // Save lastData for open machine count continut...

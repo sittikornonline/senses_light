@@ -115,7 +115,7 @@ void set_payload()
     payload_str.concat(":");
     payload_str.concat(String(batt_voltage, 2));
     payload_str.concat(":");
-    payload_str.concat(String(cnt_payload)); 
+    payload_str.concat(String(cnt_payload));
 
 
 

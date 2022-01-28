@@ -11,7 +11,7 @@ void initall()
   //------------------------ Serial CMD ----------------------//
   inputString.reserve(200);
   payload_w.reserve(2000);
-  payload_mqtt.reserve(90000);
+  payload_mqtt.reserve(95000);
 
 
   //------------------------ EEPROM ----------------------//
@@ -90,7 +90,7 @@ void initall()
   xTaskCreatePinnedToCore(
     f_Task_spiff,   /* Task function. */
     "Task_spiff",     /* name of task. */
-    13000,       /* Stack size of task */
+    16000,       /* Stack size of task */
     NULL,        /* parameter of the task */
     1,           /* priority of the task */
     &Task_spiff,      /* Task handle to keep track of created task */

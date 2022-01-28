@@ -169,10 +169,19 @@ void f_Task_spiff( void * pvParameters ) {
         spiff.deleteFile(SPIFFS, "/buffer.txt");
         spiff.deleteFile(SPIFFS, "/writeShift.txt");
         spiff.deleteFile(SPIFFS, "/lastData.txt");
-        EEPROM.writeString(add_cnt_payload, "0");
-        EEPROM.commit();
         Serial.println("delete success");
       }
+
+
+      else if (code_cmd_spiff == 8) {
+        Serial.println("set_payload");
+        set_payload();
+      }
+
+      else if (code_cmd_spiff == 9) {
+        Serial.println("test_larg_payload");
+        test_larg_payload();
+      } 
     }
     code_cmd_spiff = 0;
     flag_spiff = false;
