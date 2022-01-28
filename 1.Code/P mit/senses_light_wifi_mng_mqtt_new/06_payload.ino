@@ -89,8 +89,7 @@ void set_payload()
     Serial.println("ACC ANGLE X  : " + String(mpu6050Data));
     Serial.println("BATTERY V    : " + String(batt_voltage, 3));
     Serial.print("CHARGE STA   : "); Serial.println(digitalRead(CHG_PIN) ? "CHRG" : "FULL");
-    Serial.print("ERROR CODE   : 0x"); Serial.print(Error_code < 0x10 ? "0" : ""); Serial.println(Error_code, HEX);
-    Serial.println("CNT PAY    : " + String(cnt_payload));
+    Serial.print("ERROR CODE   : 0x"); Serial.print(Error_code < 0x10 ? "0" : ""); Serial.println(Error_code, HEX); 
     Serial.println("----------------------------------------");
 
 
@@ -114,33 +113,8 @@ void set_payload()
     payload_str.concat(String(mpu6050Data));
     payload_str.concat(":");
     payload_str.concat(String(batt_voltage, 2));
-    payload_str.concat(":");
-    payload_str.concat(String(cnt_payload)); 
-
-
-
-    String _cnt_group_payload = EEPROM.readString(add_cnt_group_payload);
-    int _cnt_group_payload_int = _cnt_group_payload.toInt();
-    if (_cnt_group_payload_int <= 0 || _cnt_group_payload == "")
-    {
-      cnt_group_payload = 0;
-    }
-
-    cnt_group_payload = _cnt_group_payload_int;
-    cnt_group_payload++;
-    EEPROM.writeString(add_cnt_group_payload, String(cnt_group_payload));
-    EEPROM.commit();
-
-
-    if (cnt_group_payload >= max_group_payload)
-    {
-      payload_str.concat("@");
-      cnt_group_payload = 1;
-      EEPROM.writeString(add_cnt_group_payload, String(cnt_group_payload));
-      EEPROM.commit();
-    }
-  }
-
+    payload_str.concat("@"); 
+ 
 }
 
 

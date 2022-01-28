@@ -118,10 +118,6 @@ void initall()
   mqtt_wifi.setServer(mqtt_broker, mqtt_port);
   mqtt_wifi.setCallback(mqttCallback);
 
-
-  //------------ GPIO - PUSH BUTTON For test RTC --------//
-
-  pinMode(push_button_pin, INPUT);
-
+ 
 
 }
