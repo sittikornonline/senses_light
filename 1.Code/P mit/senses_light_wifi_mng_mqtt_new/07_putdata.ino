@@ -3,101 +3,104 @@ void putData()
 
   set_payload(); delay(1000);
 
+  String max_log = "";
+  if (test_max_log == true)
+  {
+    max_log = test_larg_payload();
+  }
+
+
   if (!SPIFFS.begin(FORMAT_SPIFFS_IF_FAILED)) {
     Serial.println("SPIFFS Mount Failed");
     return;
   }
 
-  String a = test_larg_payload();
-  
   String dataFileName = "";
-  dataFileName.reserve(10000);
-  dataFileName = payload_str + ends;
+  dataFileName.reserve(20000);
+
+  if (test_max_log == true)
+  {
+    //dataFileName =  max_log + ends;
+    dataFileName = payload_str  + ends;
+  }
+  else {
+    dataFileName = payload_str  + ends;
+  }
 
   unsigned int lengths = dataFileName.length() + 1;
   char dataFileName1[lengths];
 
-  dataFileName.toCharArray(dataFileName1, lengths);
-  spiff.appendFile(SPIFFS, "/buffer.txt", dataFileName1);
-  Serial.print("appendFile => ");   Serial.println(dataFileName1);
+  if (cnt_payload >= min_file_1 && cnt_payload <= max_file_1)
+  {
 
-  //Serial.println("========== readFile ==============");
+    dataFileName.toCharArray(dataFileName1, lengths);
+    spiff.appendFile(SPIFFS, "/buffer.txt", dataFileName1);
+    Serial.print("buffer appendFile => ");   Serial.println(dataFileName1);
 
-  String sdFile = "";
-  sdFile.reserve(90000);
+    //Serial.println("========== readFile ==============");
 
-  sdFile = spiff.readFile(SPIFFS, "/buffer.txt");
-  Serial.println("readFile  : "); Serial.println(sdFile);
+    String sdFile = "";
+    sdFile.reserve(45000);
 
-  // Save lastData for open machine count continut...
-  spiff.writeFile(SPIFFS, "/lastData.txt", dataFileName1);
+    sdFile = spiff.readFile(SPIFFS, "/buffer.txt");
+    Serial.println("buffer readFile  : "); Serial.println(sdFile);
+    emptyFile = false;
+    delay(1500);
 
-  emptyFile = false;
+  }
+
+  else if (cnt_payload >= min_file_2 && cnt_payload <= max_file_2)
+  {
+
+    dataFileName.toCharArray(dataFileName1, lengths);
+    spiff.appendFile(SPIFFS, "/buffer_2.txt", dataFileName1);
+    Serial.print("buffer_2 appendFile => ");   Serial.println(dataFileName1);
+
+    //Serial.println("========== readFile ==============");
+
+    String sdFile = "";
+    sdFile.reserve(45000);
+
+    sdFile = spiff.readFile(SPIFFS, "/buffer_2.txt");
+    Serial.println("buffer_2 readFile  : "); Serial.println(sdFile);
+    emptyFile_2 = false;
+    delay(1500);
+
+  }
+
+  else if (cnt_payload >= min_file_3 && cnt_payload <= max_file_3)
+  {
+
+    dataFileName.toCharArray(dataFileName1, lengths);
+    spiff.appendFile(SPIFFS, "/buffer_3.txt", dataFileName1);
+    Serial.print("buffer_3 appendFile => ");   Serial.println(dataFileName1);
+
+    //Serial.println("========== readFile ==============");
+
+    String sdFile = "";
+    sdFile.reserve(45000);
+
+    sdFile = spiff.readFile(SPIFFS, "/buffer_3.txt");
+    Serial.println("buffer_3 readFile  : "); Serial.println(sdFile);
+    emptyFile_3 = false;
+    delay(1500);
+
+  }
+
+
+
   payload_str = "";
   flag_putdata = false;
 
   //Go to sleep now
-  esp_deep_sleep_start();
+  if (test_max_log == false)
+  {
+    delay(2000);
+    esp_deep_sleep_start();
+  }
 
 }
 
-
-
-void shiftData()
-{
-
-  if (!SPIFFS.begin(FORMAT_SPIFFS_IF_FAILED)) {
-    Serial.println("SPIFFS Mount Failed");
-    return;
-  }
-
-  Serial.println("\n\n========== shiftData  ==============");
-
-  String  sdFile = "";
-  String  shiftString = "";
-  String  _shiftString = "";
-  String  cutFirstString = "";
-  String  _cutFirstString = "";
-  unsigned int lencutfist = 0;
-
-  //Serial.println("========== readFile ==============");
-  sdFile = spiff.readFile(SPIFFS, "/buffer.txt");
-  Serial.println("readFile  : "); Serial.println(sdFile);
-
-  unsigned int sdFileLength = sdFile.length();
-
-
-  if (sdFile == "") {
-    emptyFile = true;
-    Serial.println("Empty file : shiftData");
-  }
-  else {
-
-    payload_mqtt =  sdFile;
-
-    int msgLng = setPayload_w().length();
-    mqtt_wifi.beginPublish(mqtt_pub.c_str(), msgLng, false);
-    bool status_send = mqtt_wifi.print(setPayload_w().c_str());
-    debug("Mode W - payload : "); debugln(setPayload_w());
-    debug("status_send      : "); debugln(String(status_send));
-    payload_mqtt = "";
-
-
-    if (status_send == true)
-    {
-      spiff.deleteFile(SPIFFS, "/buffer.txt");
-      //Serial.println("deleteFile");
-    }
-
-    //Serial.println("========== readFile ==============");
-    sdFile = spiff.readFile(SPIFFS, "/buffer.txt");
-    Serial.println("readFile  : "); Serial.println(sdFile);
-
-    delay(1000); // do not remove
-  }
-
-
-}
 
 
 void writeShift(String dataFileName) { // Write firt value to file : if need unshift give read from writeShift
@@ -216,9 +219,5 @@ void lastData() {
     _shiftString = shiftString;
 
     Serial.print("_shiftString : "); Serial.println(_shiftString);
-
-
-
-
   }
 }

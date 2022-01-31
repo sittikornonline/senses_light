@@ -23,6 +23,15 @@ void initall()
   }
 
 
+  String _cnt_payload = EEPROM.readString(add_cnt_payload);
+  int _cnt_payload_int = _cnt_payload.toInt();
+  if (_cnt_payload_int <= 0 || _cnt_payload == "")
+  {
+    cnt_payload = 0;
+  }
+  cnt_payload = _cnt_payload_int;
+
+
 
 
   //-------------- WiFiManager -------------------//
@@ -51,7 +60,7 @@ void initall()
   xTaskCreatePinnedToCore(
     f_Task_reconnect_wifi,   /* Task function. */
     "Task_reconnect_wifi",     /* name of task. */
-    30000,       /* Stack size of task */
+    31000,       /* Stack size of task */
     NULL,        /* parameter of the task */
     1,           /* priority of the task */
     &Task_reconnect_wifi,      /* Task handle to keep track of created task */
@@ -90,7 +99,7 @@ void initall()
   xTaskCreatePinnedToCore(
     f_Task_spiff,   /* Task function. */
     "Task_spiff",     /* name of task. */
-    16000,       /* Stack size of task */
+    22000,       /* Stack size of task */
     NULL,        /* parameter of the task */
     1,           /* priority of the task */
     &Task_spiff,      /* Task handle to keep track of created task */
@@ -118,6 +127,6 @@ void initall()
   mqtt_wifi.setServer(mqtt_broker, mqtt_port);
   mqtt_wifi.setCallback(mqttCallback);
 
- 
+
 
 }

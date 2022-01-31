@@ -1,7 +1,8 @@
 //------------------------ Setting ------------------//
 #define wifi_mng false
 bool c_setup_wifi = false;
-bool debug_sensor = true;
+bool debug_sensor = false;
+bool test_max_log = false;
 
 //------------------------ WiFi ------------------//
 
@@ -73,7 +74,7 @@ void checkButton();
 //------------------------ MQTT ----------------------//
 
 char*mqtt_broker  = "tracking.sensesiot.com";
-int mqtt_port = 3888;
+int mqtt_port = 3902;
 String device_id = "";
 String mqtt_pub = "push_";
 String mqtt_sub = "ctrl_";
@@ -139,11 +140,13 @@ void initall();
 
 //------------------------ EEPROM ----------------------//
 #include "EEPROM.h"
-#define EEPROM_SIZE 120
+#define EEPROM_SIZE 150
 #define add_ssid 0
 #define add_passw 30
 #define add_unix_time 60
+#define add_cnt_payload 90
 
+int cnt_payload = 0;
 //------------------------ Serial CMD -------------------//
 
 
@@ -152,7 +155,7 @@ bool stringComplete = false;
 void serialEvent();
 
 bool debug_all = true;
-bool debug_other = false;
+bool debug_other = true;
 bool flag_putdata = false;
 
 void f_cmd(String data);
@@ -284,7 +287,7 @@ bool battFullFlag = false;
 RTC_DATA_ATTR static time_t last;
 RTC_DATA_ATTR static uint32_t bootcount;
 #define uS_TO_S_FACTOR 1000000  //Conversion factor for micro seconds to seconds
-byte TIME_TO_SLEEP = 1;        //Time ESP32 will go to sleep (in seconds)
+byte TIME_TO_SLEEP = 60;        //Time ESP32 will go to sleep (in seconds)
 
 
 
@@ -351,12 +354,35 @@ senses_spiff spiff;
 String payload_str = "";
 String payload_mqtt = "";
 String ends = "\n";
+
 bool emptyFile = false;
+bool emptyFile_2 = false;
+bool emptyFile_3 = false;
+bool emptyFile_4 = false;
+
+
+#define min_file_1 1
+#define max_file_1 250
+
+#define min_file_2 251
+#define max_file_2 500
+
+#define min_file_3 501
+#define max_file_3 750
+
+
+//#define min_file_1 1
+//#define max_file_1 5
+//
+//#define min_file_2 6
+//#define max_file_2 10
+//
+//#define min_file_3 11
+//#define max_file_3 15
+
 byte code_cmd_spiff = 0;
 bool flag_spiff = false;
 String test_larg_payload();
 
 //----------------- RTC - BuildIn ----------------------//
 bool flag_upload_when_night = true;
-
- 

@@ -155,20 +155,57 @@ void f_Task_spiff( void * pvParameters ) {
       }
 
 
-      else if (code_cmd_spiff == 6) {
+      else if (code_cmd_spiff == 61) {
         //Read buffer
+        int _cnt_payload = min_file_1;
+        EEPROM.writeString(add_cnt_payload, String(_cnt_payload));
+        EEPROM.commit();
         Serial.println("========== Read buffer  ==============");
         String sdFile = spiff.readFile(SPIFFS, "/buffer.txt");
-        Serial.println("readFile buffer  : "); Serial.println(sdFile);
+        delay(1000);
+        Serial.println("1 readFile buffer  : "); Serial.println(sdFile);
+        cnt_payload = min_file_1;
       }
 
 
+      else if (code_cmd_spiff == 62) {
+        //Read buffer
+        int _cnt_payload = min_file_2;
+        EEPROM.writeString(add_cnt_payload, String(_cnt_payload));
+        EEPROM.commit();
+        Serial.println("========== Read buffer  ==============");
+        String sdFile = spiff.readFile(SPIFFS, "/buffer_2.txt");
+        Serial.println("2 readFile buffer  : "); Serial.println(sdFile);
+        cnt_payload = min_file_2;
+      }
+
+
+      else if (code_cmd_spiff == 63) {
+        //Read buffer
+        int _cnt_payload = min_file_3;
+        EEPROM.writeString(add_cnt_payload, String(_cnt_payload));
+        EEPROM.commit();
+        Serial.println("========== Read buffer  ==============");
+        String sdFile = spiff.readFile(SPIFFS, "/buffer_3.txt");
+        Serial.println("3 readFile buffer  : "); Serial.println(sdFile);
+        cnt_payload = min_file_3;
+      }
+
+
+      
       else if (code_cmd_spiff == 7) {
         //delete all data
 
         spiff.deleteFile(SPIFFS, "/buffer.txt");
+        spiff.deleteFile(SPIFFS, "/buffer_2.txt");
+        spiff.deleteFile(SPIFFS, "/buffer_3.txt"); 
         spiff.deleteFile(SPIFFS, "/writeShift.txt");
         spiff.deleteFile(SPIFFS, "/lastData.txt");
+
+        byte cnt_payload = 0;
+        EEPROM.writeString(add_cnt_payload, String(cnt_payload));
+        EEPROM.commit();
+
         Serial.println("delete success");
       }
 
@@ -181,7 +218,9 @@ void f_Task_spiff( void * pvParameters ) {
       else if (code_cmd_spiff == 9) {
         Serial.println("test_larg_payload");
         test_larg_payload();
-      } 
+      }
+
+
     }
     code_cmd_spiff = 0;
     flag_spiff = false;

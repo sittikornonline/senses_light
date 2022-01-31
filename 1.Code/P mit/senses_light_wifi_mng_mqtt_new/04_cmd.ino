@@ -82,11 +82,33 @@ void f_cmd(String data)
   }
 
 
-  else if (data == "6") {
+  else if (data == "61") {
     //Read buffer
     //Serial.println("\n\n========== Read buffer  ==============");
     flag_spiff = true;
-    code_cmd_spiff = 6;
+    code_cmd_spiff = 61;
+  }
+
+  else if (data == "62") {
+    //Read buffer
+    //Serial.println("\n\n========== Read buffer  ==============");
+    flag_spiff = true;
+    code_cmd_spiff = 62;
+  }
+
+
+  else if (data == "63") {
+    //Read buffer
+    //Serial.println("\n\n========== Read buffer  ==============");
+    flag_spiff = true;
+    code_cmd_spiff = 63;
+  }
+
+  else if (data == "64") {
+    //Read buffer
+    //Serial.println("\n\n========== Read buffer  ==============");
+    flag_spiff = true;
+    code_cmd_spiff = 64;
   }
 
 
@@ -104,10 +126,20 @@ void f_cmd(String data)
   }
 
   else if (data == "9")
-  { 
+  {
     code_cmd_spiff = 9;
     flag_spiff = true;
   }
+
+  else if (data == "10")
+  {
+    flag_spiff = true;
+    code_cmd_spiff = 10; // flag_upload_when_night == true
+    flag_spiff = true;
+  }
+
+
+
 
   else if (data == "rs") {
     ESP.restart();
@@ -137,6 +169,16 @@ void f_cmd(String data)
   else if (data == "t0") {
     flag_upload_when_night = false;
   }
+
+  else if (data == "tm1") {
+    test_max_log = true;
+  }
+
+  else if (data == "tm0") {
+    test_max_log = false;
+  }
+
+
 
 
   data = "";
@@ -176,13 +218,16 @@ void f_debug_other()
       //      debug("FreeHeap    : "); debugln(String(ESP.getFreeHeap()));
 
       Serial.print("mac_address       : "); Serial.println(mac_address);
-      Serial.print("flag_upload_when_night        : "); Serial.println(flag_upload_when_night);
+      Serial.print("flag_upload_night : "); Serial.println(flag_upload_when_night);
       Serial.print("c_setup_wifi      : "); Serial.println(c_setup_wifi);
       Serial.print("status_mqtt       : "); Serial.println(status_mqtt);
       Serial.print("emptyFile         : "); Serial.println(emptyFile);
+      Serial.print("emptyFile_2       : "); Serial.println(emptyFile_2);
+      Serial.print("emptyFile_3       : "); Serial.println(emptyFile_3);
+      Serial.print("test_max_log      : "); Serial.println(test_max_log);
+      Serial.print("cnt_payload       : "); Serial.println(cnt_payload);
       Serial.print("flag_putdata      : "); Serial.println(flag_putdata);
       Serial.println("----------------------------------------");
-      debugln("---------------------");
     }
   }
 }

@@ -14,7 +14,7 @@ void blink(uint8_t count, uint8_t pin) {
 }
 
 void setup() {
- 
+
 
   initall();
   startMillis = millis();
@@ -50,27 +50,31 @@ void setup() {
 }
 void loop() {
 
-  
-  if (flag_upload_when_night == true && c_setup_wifi == true)
+  if (test_max_log == false)
   {
-    if (status_mqtt == true && emptyFile == false)
+
+    if (flag_upload_when_night == true && c_setup_wifi == true)
     {
-      code_cmd_spiff = 3; // shift data
+      if (status_mqtt == true && cnt_payload > 0)
+      {
+        code_cmd_spiff = 3; // shift data
+        flag_spiff = true;
+      }
+
+      else if (status_mqtt == true && emptyFile == true && emptyFile_2 == true && emptyFile_3 == true)
+      {
+        ESP.restart();
+      }
+    }
+
+
+    else if (flag_upload_when_night == false)
+    {
+      code_cmd_spiff = 1; // put data
       flag_spiff = true;
+      flag_putdata = true;
+
     }
-
-    else if (status_mqtt == true && emptyFile == true)
-    {
-      ESP.restart();
-    }
-  }
-
-
-  else if (flag_upload_when_night == false)
-  {
-    code_cmd_spiff = 1; // put data
-    flag_spiff = true;
-    flag_putdata = true;
   }
 
 }

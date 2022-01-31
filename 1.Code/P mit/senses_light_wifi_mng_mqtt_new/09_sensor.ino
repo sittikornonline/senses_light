@@ -200,7 +200,8 @@ void f_get_sensor()
     c_setup_wifi = false;
   }
 
-  Serial.print("flag_upload_when_night : "); Serial.println(flag_upload_when_night);
+//  Serial.print("flag_upload_when_night  : "); Serial.println(flag_upload_when_night);
+//  
 
 
 
