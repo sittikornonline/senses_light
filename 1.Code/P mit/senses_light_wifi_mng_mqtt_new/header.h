@@ -130,7 +130,7 @@ struct tm timeinfo;
 unsigned long getTime();
 String getTime_str();
 String unix_time_str = "";
-byte time_operate_sec  = 18;
+byte time_operate_sec  = 14;
 
 
 //----------------------- Other ---------------------------//
