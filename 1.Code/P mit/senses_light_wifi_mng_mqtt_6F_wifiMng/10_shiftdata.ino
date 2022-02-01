@@ -323,7 +323,6 @@ void shiftData()
 
   if ( flag_remove_cnt_payload == true)
   {
- 
     int msgLng = setPayload_send_finish().length();
     mqtt_wifi.beginPublish(mqtt_pub.c_str(), msgLng, false);
     bool status_send = mqtt_wifi.print(setPayload_send_finish().c_str());
@@ -342,7 +341,6 @@ void shiftData()
     emptyFile_4 = true;
     emptyFile_5 = true;
     emptyFile_6 = true;
-    
   }
 
 

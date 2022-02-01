@@ -134,7 +134,7 @@ String setPayload_w() {
   payload.concat(mode);
   payload.concat(":");
   payload.concat(mac_address);
-  payload.concat(":");  
+  payload.concat(":");
   payload.concat(payload_mqtt);
   return payload;
 }
@@ -151,6 +151,8 @@ String setPayload_send_finish() {
   payload.concat(getTime_str());
   return payload;
 }
+
+
 
 
 

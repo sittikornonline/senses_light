@@ -1,11 +1,11 @@
 //------------------------ Setting ------------------//
-#define wifi_mng false
+#define wifi_mng true
 bool c_setup_wifi = false;
-bool debug_sensor = false;
+bool debug_sensor = true;
 
 bool test_max_log = false;
 
-#define test_max_log2 false //limit record for test : if run set false
+#define test_max_log2 true //limit record for test : if run set false
 //------------------------ WiFi ------------------//
 
 #include "Arduino.h"
@@ -16,14 +16,18 @@ bool test_max_log = false;
 WiFiClient client_wifi;
 PubSubClient mqtt_wifi(client_wifi);
 
+char ssid[30] = "Senses";       // wifi manager only
+char passw[30] = "senses69";    // wifi manager only
+
+
 //char ssid[30] = "Tenda_815AD0";
 //char passw[30] = "qr4DiMDh";
 
 //char ssid[30] = "Senses";
 //char passw[30] = "senses69";
 
-char ssid[30] = "BIG_WIFI_2.4G";
-char passw[30] = "076434654";
+//char ssid[30] = "BIG_WIFI_2.4G";
+//char passw[30] = "076434654";
 
 //char ssid[30] = "khoyuiindy@14_2.4G";
 //char passw[30] = "22290114";
@@ -69,6 +73,7 @@ bool last_status_sta = false;
 
 
 bool shouldSaveConfig = false;
+bool flag_check_button_wifi_mng = false;
 
 void checkButton();
 
@@ -93,8 +98,8 @@ String payload_w = "";
 bool status_send_w = false;
 
 String setPayload_w();
-String setPayload_hb();
 String setPayload_send_finish();
+String setPayload_hb();
 
 
 //------------------------  Interval ----------------------//
