@@ -287,7 +287,7 @@ bool battFullFlag = false;
 RTC_DATA_ATTR static time_t last;
 RTC_DATA_ATTR static uint32_t bootcount;
 #define uS_TO_S_FACTOR 1000000  //Conversion factor for micro seconds to seconds
-byte TIME_TO_SLEEP = 60;        //Time ESP32 will go to sleep (in seconds)
+byte TIME_TO_SLEEP = 2;        //Time ESP32 will go to sleep (in seconds)
 
 
 
@@ -361,24 +361,24 @@ bool emptyFile_3 = false;
 bool emptyFile_4 = false;
 
 
-#define min_file_1 1
-#define max_file_1 250
-
-#define min_file_2 251
-#define max_file_2 500
-
-#define min_file_3 501
-#define max_file_3 750
-
-
 //#define min_file_1 1
-//#define max_file_1 5
+//#define max_file_1 250
 //
-//#define min_file_2 6
-//#define max_file_2 10
+//#define min_file_2 251
+//#define max_file_2 500
 //
-//#define min_file_3 11
-//#define max_file_3 15
+//#define min_file_3 501
+//#define max_file_3 750
+
+
+#define min_file_1 1
+#define max_file_1 2
+
+#define min_file_2 3
+#define max_file_2 4
+
+#define min_file_3 5
+#define max_file_3 6
 
 byte code_cmd_spiff = 0;
 bool flag_spiff = false;

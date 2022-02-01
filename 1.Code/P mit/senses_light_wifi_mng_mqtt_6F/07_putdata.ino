@@ -36,7 +36,7 @@ void putData()
   {
 
     dataFileName.toCharArray(dataFileName1, lengths);
-    spiff.appendFile(SPIFFS, "/buffer.txt", dataFileName1);
+    spiff.appendFile(SPIFFS, "/buffer_1.txt", dataFileName1);
     Serial.print("buffer_1 appendFile => ");   Serial.println(dataFileName1);
 
     //Serial.println("========== readFile ==============");
@@ -44,10 +44,10 @@ void putData()
     String sdFile = "";
     sdFile.reserve(45000);
 
-    sdFile = spiff.readFile(SPIFFS, "/buffer.txt");
+    sdFile = spiff.readFile(SPIFFS, "/buffer_1.txt");
     Serial.println("buffer_1 readFile  : "); Serial.println(sdFile);
     emptyFile_1 = false;
-    delay(1500);
+    delay(1000);
 
   }
 
@@ -66,7 +66,7 @@ void putData()
     sdFile = spiff.readFile(SPIFFS, "/buffer_2.txt");
     Serial.println("buffer_2 readFile  : "); Serial.println(sdFile);
     emptyFile_2 = false;
-    delay(1500);
+    delay(1000);
 
   }
 
@@ -85,7 +85,7 @@ void putData()
     sdFile = spiff.readFile(SPIFFS, "/buffer_3.txt");
     Serial.println("buffer_3 readFile  : "); Serial.println(sdFile);
     emptyFile_3 = false;
-    delay(1500);
+    delay(1000);
 
   }
 
@@ -105,7 +105,7 @@ void putData()
     sdFile = spiff.readFile(SPIFFS, "/buffer_4.txt");
     Serial.println("buffer_4 readFile  : "); Serial.println(sdFile);
     emptyFile_4 = false;
-    delay(1500);
+    delay(1000);
 
   }
 
@@ -124,7 +124,7 @@ void putData()
     sdFile = spiff.readFile(SPIFFS, "/buffer_5.txt");
     Serial.println("buffer_5 readFile  : "); Serial.println(sdFile);
     emptyFile_5 = false;
-    delay(1500);
+    delay(1000);
   }
 
 
@@ -143,7 +143,7 @@ void putData()
     sdFile = spiff.readFile(SPIFFS, "/buffer_6.txt");
     Serial.println("buffer_6 readFile  : "); Serial.println(sdFile);
     emptyFile_6 = false;
-    delay(1500);
+    delay(1000);
   }
 
 
@@ -153,7 +153,7 @@ void putData()
   //Go to sleep now
   if (test_max_log == false)
   {
-    delay(2000);
+    delay(1000);
     esp_deep_sleep_start();
   }
 

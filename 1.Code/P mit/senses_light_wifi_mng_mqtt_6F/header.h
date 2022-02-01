@@ -5,7 +5,7 @@ bool debug_sensor = false;
 
 bool test_max_log = false;
 
-#define test_max_log2 true //limit record for test : if run set false
+#define test_max_log2 false //limit record for test : if run set false
 //------------------------ WiFi ------------------//
 
 #include "Arduino.h"
@@ -77,6 +77,7 @@ void checkButton();
 
 char*mqtt_broker  = "tracking.sensesiot.com";
 int mqtt_port = 3902;
+//int mqtt_port = 3888; //test
 String device_id = "";
 String mqtt_pub = "push_";
 String mqtt_sub = "ctrl_";
