@@ -96,41 +96,56 @@ void f_get_sensor()
 
 
   /* Only ESP_RST_POWERON case. MPU6050 run calcOffsets function*/
-  if (gyroOffSetFlag) {
-    mpu.calcOffsets(true, true); // gyro and accelero
-    gyroOffSetFlag = false;
-    delay(1500);
-    mpu.update();
-    mpu6050Temps = mpu.getAccAngleX();
-  }
+  //  if (gyroOffSetFlag) {
+  //    mpu.calcOffsets(true, true); // gyro and accelero
+  //    gyroOffSetFlag = false;
+  //    delay(1500);
+  //    mpu.update();
+  //    mpu6050Temps = mpu.getAccAngleX();
+  //  }
+
+
+
+
   /* Setup time delay for all sensor */
   delay(1500);
 
   /* If bleAdverFlag flag is SET. then read all sensor data. */
- // if (bleAdverFlag) {
-    mpu.update();
-    //  mpu6050Data = mpu.getTemp();        //  temperature
-    mpu6050Data = mpu.getAccX();        //  AccX
-    //  mpu6050Data = mpu.getAccY();        //  AccY
-    //  mpu6050Data = mpu.getAccZ();        //  AccZ
-    //  mpu6050Data = mpu.getGyroX();       //  GyroX
-    //  mpu6050Data = mpu.getGyroY();       //  GyroY
-    //  mpu6050Data = mpu.getGyroZ();       //  GyroZ
-    //  mpu6050Data = mpu.getAccAngleX();     //  AccAngleX
-    //  mpu6050Data = mpu.getAccAngleY();   //  AccAngleY
-    //  mpu6050Data = mpu.getAngleX();      //  AngleX
-    //  mpu6050Data = mpu.getAngleY();      //  AngleY
-    //  mpu6050Data = mpu.getAngleZ();      //  AngleZ
+  // if (bleAdverFlag) {
+  mpu.update();
+  //  mpu6050Data = mpu.getTemp();        //  temperature
+  mpu6050Data = mpu.getAccX();        //  AccX
+  Serial.println("00   : " + String(mpu6050Data));
+  mpu6050Data = mpu.getAccY();        //  AccY
+  Serial.println("01   : " + String(mpu6050Data));
+  mpu6050Data = mpu.getAccZ();        //  AccZ
+  Serial.println("02   : " + String(mpu6050Data));
+  mpu6050Data = mpu.getGyroX();       //  GyroX
+  Serial.println("03   : " + String(mpu6050Data));
+  mpu6050Data = mpu.getGyroY();       //  GyroY
+  Serial.println("04   : " + String(mpu6050Data));
+  mpu6050Data = mpu.getGyroZ();       //  GyroZ
+  Serial.println("05   : " + String(mpu6050Data));
+  mpu6050Data = mpu.getAccAngleX();     //  AccAngleX
+  Serial.println("06   : " + String(mpu6050Data));
+  mpu6050Data = mpu.getAccAngleY();   //  AccAngleY
+  Serial.println("07   : " + String(mpu6050Data));
+  mpu6050Data = mpu.getAngleX();      //  AngleX
+  Serial.println("08   : " + String(mpu6050Data));
+  mpu6050Data = mpu.getAngleY();      //  AngleY
+  Serial.println("09   : " + String(mpu6050Data));
+  mpu6050Data = mpu.getAngleZ();      //  AngleZ
+  Serial.println("10   : " + String(mpu6050Data));
 
-    //    light_6030_raw = light_6030.readLight();
+  //    light_6030_raw = light_6030.readLight();
 
-    VEML6040_red = RGBWSensor.getRed();
-    VEML6040_green = RGBWSensor.getGreen();
-    VEML6040_blue = RGBWSensor.getBlue();
-    VEML6040_white = RGBWSensor.getWhite();
+  VEML6040_red = RGBWSensor.getRed();
+  VEML6040_green = RGBWSensor.getGreen();
+  VEML6040_blue = RGBWSensor.getBlue();
+  VEML6040_white = RGBWSensor.getWhite();
 
-    uv_a_raw = (uv.uva() * 100);       // function uv.uva RETURN folting point
-    uv_b_raw = (uv.uvb() * 100);
+  uv_a_raw = (uv.uva() * 100);       // function uv.uva RETURN folting point
+  uv_b_raw = (uv.uvb() * 100);
   //}
   light_6030_raw = light_6030.readLight();
   /*********************************************************************************** SENSOR POWER OFF ****************************************************************************************************/
@@ -200,8 +215,8 @@ void f_get_sensor()
     c_setup_wifi = false;
   }
 
-//  Serial.print("flag_upload_when_night  : "); Serial.println(flag_upload_when_night);
-//  
+  //  Serial.print("flag_upload_when_night  : "); Serial.println(flag_upload_when_night);
+  //
 
 
 
