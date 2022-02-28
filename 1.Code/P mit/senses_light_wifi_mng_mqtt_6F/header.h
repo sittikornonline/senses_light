@@ -22,8 +22,11 @@ PubSubClient mqtt_wifi(client_wifi);
 //char ssid[30] = "Senses";
 //char passw[30] = "senses69";
 
-char ssid[30] = "BIG_WIFI_2.4G";
-char passw[30] = "076434654";
+//char ssid[30] = "BIG_WIFI_2.4G";
+//char passw[30] = "076434654";
+
+char ssid[30] = "KK-Mobile";
+char passw[30] = "0624594516";
 
 //char ssid[30] = "khoyuiindy@14_2.4G";
 //char passw[30] = "22290114";
@@ -188,9 +191,11 @@ uint8_t ble_mac[7];
 #include "SparkFun_VEML6030_Ambient_Light_Sensor.h"
 #define AL_ADDR 0x48
 SparkFun_Ambient_Light light_6030(AL_ADDR);
-float gain = .125;
-int times = 100;
 long light_6030_raw = 0;
+
+ //  Gain 1/4 (0.4608), IT 50 ms or Gain 1/8 (1.8432), IT 25 ms
+float gain = 0.4608; 
+int times = 50;
 
 //----------------- RGB Sensor : 6040 -------------//
 #include "veml6040.h"
@@ -229,7 +234,9 @@ float uv_b_raw;
 //float AngleY;
 //float AngleZ;
 float mpu6050Temps;
-float mpu6050Data;
+float mpu6050Data_x;
+float mpu6050Data_y;
+float mpu6050Data_z;
 MPU6050 mpu(Wire);
 /*
   //----------------- MPU : 6050 -------------//
@@ -310,6 +317,9 @@ const int blue_Channel = 2;
 const int resolution = 8;
 
 void led_rgb(int r, int g, int b);
+void led_sync();
+void led_batt_full();  
+void led_batt_low();
 
 //----------------- V-Batt -------------------//
 #define v_batt_pin 39

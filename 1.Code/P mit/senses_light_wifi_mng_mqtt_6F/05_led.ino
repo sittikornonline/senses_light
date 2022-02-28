@@ -7,11 +7,20 @@ void led_rgb(int r, int g, int b)
 
 void led_batt_full()
 {
-  led_rgb(255, 100, 255);
+  Serial.println("led batt full");
+  led_rgb(0, 255, 0);
 }
 
 
 void led_batt_low()
 {
-  led_rgb(100, 100, 255);
+  Serial.println("led batt low");
+  led_rgb(255, 0, 0);
+}
+
+
+void led_sync()
+{
+  Serial.println("led sync");
+  led_rgb(0, 0, 255);
 }

@@ -48,7 +48,9 @@ void rendom()
   VEML6040_white = random(1, 65535);
   uv_a_raw = (float)random(0, 300.00);
   uv_b_raw = (float)random(0, 300.00);
-  mpu6050Data = (float)random(0, 200.05);
+  mpu6050Data_x = (float)random(0, 200.05);
+  mpu6050Data_y = (float)random(0, 200.05);
+  mpu6050Data_z = (float)random(0, 200.05);
   Error_code = 0x00;
 }
 
@@ -91,7 +93,9 @@ void set_payload()
     Serial.println("6040 W        : " + String(VEML6040_white));
     Serial.println("6075 UVA      : " + String((float)uv_a_raw / 100));
     Serial.println("6075 UVB      : " + String((float)uv_b_raw / 100));
-    Serial.println("ACC ANGLE X   : " + String(mpu6050Data));
+    Serial.println("ACC ANGLE X   : " + String(mpu6050Data_x));
+    Serial.println("ACC ANGLE Y   : " + String(mpu6050Data_y));
+    Serial.println("ACC ANGLE Z   : " + String(mpu6050Data_z));
     Serial.println("BATTERY V     : " + String(batt_voltage, 3));
     Serial.print("CHARGE STA      : "); Serial.println(digitalRead(CHG_PIN) ? "CHRG" : "FULL");
     Serial.print("ERROR CODE      : 0x"); Serial.print(Error_code < 0x10 ? "0" : ""); Serial.println(Error_code, HEX);
@@ -116,7 +120,11 @@ void set_payload()
   payload_str.concat(":");
   payload_str.concat(String((float)uv_b_raw / 100));
   payload_str.concat(":");
-  payload_str.concat(String(mpu6050Data));
+  payload_str.concat(String(mpu6050Data_x));
+  payload_str.concat(":");
+  payload_str.concat(String(mpu6050Data_y));
+  payload_str.concat(":");
+  payload_str.concat(String(mpu6050Data_z));
   payload_str.concat(":");
   payload_str.concat(String(batt_voltage, 2));
   payload_str.concat(":");

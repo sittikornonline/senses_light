@@ -29,11 +29,14 @@ void f_get_sensor()
   if (!light_6030.begin()) {
     Error_code |= VEML6030;
   }
+  light_6030.setGain(gain);
+  light_6030.setIntegTime(times);
 
   //----------------- Light : 6040 -------------//
   if (!RGBWSensor.begin()) {
     Error_code |= VEML6040;
   }
+  RGBWSensor.setConfiguration(VEML6040_IT_40MS + VEML6040_AF_AUTO + VEML6040_SD_ENABLE);
 
   //----------------- UV : 6075 -------------//
   if (!uv.begin()) {
@@ -46,47 +49,60 @@ void f_get_sensor()
   }
 
   delay(100);
-  light_6030.setGain(gain);
-  light_6030.setIntegTime(times);
-  RGBWSensor.setConfiguration(VEML6040_IT_320MS + VEML6040_AF_AUTO + VEML6040_SD_ENABLE);
+
+
 
 
 
   batt_voltage = adc.readVoltage() * 2;
-#if 0
   batt_voltage >= 4.150 ? battFullFlag = true : battFullFlag = false;
-#else
   if (batt_voltage > 4.150 && !digitalRead(CHG_PIN)) {
     battFullFlag = true;
+    led_batt_full();
   } else {
     battFullFlag = false;
   }
-#endif
-  if (!battFullFlag) {
-    //  if (digitalRead(CHG_PIN)== HIGH && batt_voltage <= 4.10) {
 
-    if (batt_voltage >= 3.70) {
-      bleAdverFlag ? blink(2, GRNLED) : blink(1, GRNLED);
-    } else if (batt_voltage >= 3.60) {
-      /* if battery > 3.60V Blink Green LED */
-      //      if (digitalRead(CHG_PIN)) { /* if battery Not full */
-      bleAdverFlag ? blink(2, BLULED) : blink(1, GRNLED);
-      //      } else {
-      //        digitalWrite(GRNLED, HIGH);   // turn OFF before sensor reading process.
-      /* blink(3, GRNLED);       */
-      //      }
-    } else if (batt_voltage > 3.50) {
-      /* if battery > 3.50V Blink Red LED */
-      bleAdverFlag ? blink(2, REDLED) : blink(1, GRNLED);
-    } else if (batt_voltage > 3.45) {
-      /* if battery > 3.45V Blink Red LED */
-      bleAdverFlag ? blink(1, REDLED) : blink(1, GRNLED);
-    } else {
-      /* if battery < 3.45V Blink Red LED and set Low battery bits. */
-      Error_code |= LOWBAT;
-      lowBattFlag = true;
-      blink(1, REDLED);
+
+  if (!battFullFlag)
+  {
+    if (batt_voltage >= 3.45)
+    {
+      led_batt_full();
     }
+
+    else
+    {
+      led_batt_low();
+    }
+
+    //    if (batt_voltage >= 3.70)
+    //    {
+    //      bleAdverFlag ? blink(2, GRNLED) : blink(1, GRNLED);
+    //    }
+    //
+    //    else if (batt_voltage >= 3.60)  /* if battery > 3.60V Blink Green LED */
+    //    {
+    //      bleAdverFlag ? blink(2, BLULED) : blink(1, GRNLED);
+    //    }
+    //
+    //    else if (batt_voltage > 3.50)  /* if battery > 3.50V Blink Red LED */
+    //    {
+    //      bleAdverFlag ? blink(2, REDLED) : blink(1, GRNLED);
+    //    }
+    //
+    //    else if (batt_voltage > 3.45) /* if battery > 3.45V Blink Red LED */
+    //    {
+    //
+    //      bleAdverFlag ? blink(1, REDLED) : blink(1, GRNLED);
+    //    }
+    //
+    //    else  /* if battery < 3.45V Blink Red LED and set Low battery bits. */
+    //    {
+    //      Error_code |= LOWBAT;
+    //      lowBattFlag = true;
+    //      blink(1, REDLED);
+    //    }
   }
   /*
     Serial.println("Voltage = "+String(adc.readVoltage()* 2)+"V");
@@ -110,9 +126,9 @@ void f_get_sensor()
   if (bleAdverFlag) {
     mpu.update();
     //  mpu6050Data = mpu.getTemp();        //  temperature
-    mpu6050Data = mpu.getAccX();        //  AccX
-    //  mpu6050Data = mpu.getAccY();        //  AccY
-    //  mpu6050Data = mpu.getAccZ();        //  AccZ
+    mpu6050Data_x = mpu.getAccX();        //  AccX
+    mpu6050Data_y = mpu.getAccY();        //  AccY
+    mpu6050Data_z = mpu.getAccZ();        //  AccZ
     //  mpu6050Data = mpu.getGyroX();       //  GyroX
     //  mpu6050Data = mpu.getGyroY();       //  GyroY
     //  mpu6050Data = mpu.getGyroZ();       //  GyroZ
@@ -200,8 +216,8 @@ void f_get_sensor()
     c_setup_wifi = false;
   }
 
-//  Serial.print("flag_upload_when_night  : "); Serial.println(flag_upload_when_night);
-//  
+  //  Serial.print("flag_upload_when_night  : "); Serial.println(flag_upload_when_night);
+  //
 
 
 
